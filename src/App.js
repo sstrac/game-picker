@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
 import './App.css';
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -9,7 +10,9 @@ function API(title) { return `https://api.rawg.io/api/games/${title}?key=${API_K
 
 const titles = [
   'hollow-knight',
-  'grounded'
+  'oblivion',
+  'dragon-age-origins',
+  'stalker-shadow-of-chernobyl'
 ]
 
 function App() {
@@ -27,7 +30,11 @@ function App() {
   return (
     <div className={"App"}>
       <Game game={game} setGame={setGame}></Game>
-      <Button variant="primary" onClick={() => setTitle(titles[getRandom(titles.length)])}>Random Game</Button>
+      <Button variant="primary" onClick={() => {
+        let title = titles[getRandom(titles.length)]
+        console.log(title)
+        setTitle(title)
+      }}>Random Game</Button>
     </div>
   );
 }
@@ -36,7 +43,7 @@ function Game(props) {
   return (
     <div>
       <h2>{props.game.name}</h2>
-      <img src={props.game.background_image}></img>
+      <Image src={props.game.background_image} fluid></Image>
     </div>
   )
 }
