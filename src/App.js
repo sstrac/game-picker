@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 import './App.css';
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className={"App"}>
       <Game game={game} setGame={setGame}></Game>
-      <Button onClick={() => setTitle(titles[getRandom(titles.length)])}>Random Game</Button>
+      <Button variant="primary" onClick={() => setTitle(titles[getRandom(titles.length)])}>Random Game</Button>
     </div>
   );
 }
