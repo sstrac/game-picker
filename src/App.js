@@ -9,23 +9,32 @@ function API(title) { return `https://api.rawg.io/api/games/${title}?key=${API_K
 
 const titles = [
   'hollow-knight',
-  'oblivion',
-  'dragon-age-origins',
-  'stalker-shadow-of-chernobyl'
+  'dragon-age-inquisition',
+  'stalker-shadow-of-chernobyl',
+  'spiritfire',
+  'nierautomata',
+  'dark-souls-iii',
+  'god-of-war-2',
+  'slay-the-spire',
+  'the-witcher-3-wild-hunt',
+  'sunset-overdrive',
+  'warframe'
 ]
 
 function App() {
   const [games, setGames] = useState([emptyGame])
-  const [titles, setTitles] = useState([''])
+  const [titles, setTitles] = useState([])
 
   useEffect(() => {
-    let gameDataPromises = titles.map(async title => {      
-      return getRAWGData(title)
-    })
-    
-    Promise.all(gameDataPromises).then((games) => {
-      setGames(games)
-    })
+    if(titles.length > 0){
+      let gameDataPromises = titles.map(async title => {      
+        return getRAWGData(title)
+      })
+      
+      Promise.all(gameDataPromises).then((games) => {
+        setGames(games)
+      })
+    }
   }, [titles])
 
   return (
@@ -64,7 +73,7 @@ function choose3UniqueTitlesRandomly(setTitles){
 }
 
 async function getRAWGData(title){
-  console.log(API(title))
+  //console.log(API(title))
   return await fetch(API(title))
   .then(r => r.json())
   .then(resJson =>  resJson )
